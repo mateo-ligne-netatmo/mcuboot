@@ -58,6 +58,10 @@
 #include "bootutil_priv.h"
 #endif
 
+#ifdef MCUBOOT_ENC_IMAGES
+#include "single_loader.h"
+#endif
+
 #include "serial_recovery_cbor.h"
 #include "bootutil/boot_hooks.h"
 
@@ -441,6 +445,13 @@ out:
 
     boot_serial_output();
     flash_area_close(fap);
+
+#ifdef MCUBOOT_ENC_IMAGES
+    if (curr_off == img_size) {
+        /* Last sector received, now start a decryption on the image if it is encrypted*/
+        rc = boot_handle_enc_fw();
+    }
+#endif //#ifdef MCUBOOT_ENC_IMAGES
 }
 
 /*

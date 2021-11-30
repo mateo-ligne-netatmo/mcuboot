@@ -154,7 +154,7 @@ if(CONFIG_BOOT_SIGNATURE_TYPE_ECDSA_P256 OR CONFIG_BOOT_ENCRYPT_EC256)
     )
   if(CONFIG_BOOT_USE_TINYCRYPT)
   # When using ECDSA signatures, pull in our copy of the tinycrypt library.
-  zephyr_library_include_directories(
+  zephyr_include_directories(
     ${BOOT_DIR}/zephyr/include
     ${TINYCRYPT_DIR}/include
     )
@@ -193,7 +193,7 @@ elseif(CONFIG_BOOT_SIGNATURE_TYPE_RSA)
   zephyr_include_directories(include)
 elseif(CONFIG_BOOT_SIGNATURE_TYPE_ED25519 OR CONFIG_BOOT_ENCRYPT_X25519)
   if(CONFIG_BOOT_USE_TINYCRYPT)
-    zephyr_library_include_directories(
+    zephyr_include_directories(
       ${MBEDTLS_ASN1_DIR}/include
       ${BOOT_DIR}/zephyr/include
       ${TINYCRYPT_DIR}/include
