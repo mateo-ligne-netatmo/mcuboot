@@ -216,7 +216,7 @@ decrypt_region_inplace(struct boot_loader_state *state,
     uint32_t blk_sz;
     uint8_t image_index;
 
-    static uint8_t buf[4096] __attribute__((aligned));
+    static uint8_t buf[DT_PROP(DT_CHOSEN_zephyr_flash, erase_block_size)]__attribute__((aligned));
     assert(sz <= sizeof buf);
 
     bytes_copied = 0;
